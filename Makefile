@@ -14,6 +14,7 @@ CFLAGS+=-ffreestanding \
 		-O0 -gdwarf -mthumb
 
 OBJS=$(O)/entry.o \
+	 $(O)/vectors.o \
 	 $(O)/main.o
 
 all: $(DIRS) $(O)/image.hex
