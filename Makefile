@@ -1,21 +1,28 @@
 .PHONY: all clean
 
+O=build
+DIRS=$(patsubst %,$(O)/%,$(shell find src -type d -printf "%P\n")) $(O)
+CC=$(CROSS_COMPILE)gcc
+OBJCOPY=$(CROSS_COMPILE)objcopy
+
+HDRS=$(shell find include -type f -name "*.h")
+OBJS=$(O)/entry.o \
+	 $(O)/vectors.o \
+	 $(O)/main.o
+
+CFLAGS=-ffreestanding \
+		-O0 -gdwarf -mthumb \
+		-Werror \
+		-Wall \
+		-Wextra \
+		-Wpedantic \
+		-Iinclude
+LDFLAGS=
+
 ifndef MCU
 $(error Please define the target MCU: $${MCU})
 endif
 include etc/${MCU}.mk
-
-O=build
-DIRS=$(patsubst src/%,$(O)/%,$(shell find src -type d -printf "%P\n")) $(O)
-CC=$(CROSS_COMPILE)gcc
-OBJCOPY=$(CROSS_COMPILE)objcopy
-
-CFLAGS+=-ffreestanding \
-		-O0 -gdwarf -mthumb
-
-OBJS=$(O)/entry.o \
-	 $(O)/vectors.o \
-	 $(O)/main.o
 
 all: $(DIRS) $(O)/image.hex
 
@@ -39,8 +46,8 @@ $(O)/image.hex: $(O)/image.elf
 
 ##
 
-flash: $(O)/image.hex
+flash: $(DIRS) $(O)/image.hex
 	st-flash --format ihex write $(O)/image.hex
 
-gdb: $(O)/image.elf
+gdb: $(DIRS) $(O)/image.elf
 	./etc/gdb.sh
