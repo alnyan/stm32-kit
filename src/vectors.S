@@ -47,8 +47,12 @@ _vectors:
     .word 0                 // 0x00A4   TIM1_UP_TIM10
     .word 0                 // 0x00A8   TIM1_TRG_COM_TIM11
     .word 0                 // 0x00AC   TIM1_CC
-    .word 0                 // 0x00B0   TIM2
+    .word irq_tim2          // 0x00B0   TIM2
     .word 0                 // 0x00B4   TIM3
     .word 0                 // 0x00B8   TIM4
-
+    .word 0                 // 0x00BC   I2C1_EV
+    .word 0                 // 0x00C0   I2C1_ER
+    .word 0                 // 0x00C4   I2C2_EV
+    .word 0                 // 0x00C8   I2C2_ER
+    .word irq_spi1          // 0x00CC   SPI1
 .size _vectors, . - _vectors

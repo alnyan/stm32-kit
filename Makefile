@@ -8,15 +8,16 @@ OBJCOPY=$(CROSS_COMPILE)objcopy
 HDRS=$(shell find include -type f -name "*.h")
 OBJS=$(O)/entry.o \
 	 $(O)/vectors.o \
+	 $(O)/spi_sd.o \
+	 $(O)/leds.o \
 	 $(O)/main.o
 
 CFLAGS=-ffreestanding \
-		-O0 -gdwarf -mthumb \
-		-Werror \
-		-Wall \
-		-Wextra \
-		-Wpedantic \
-		-Iinclude
+	   -Og -gdwarf -mthumb \
+	   -Werror \
+	   -Wall \
+	   -Wextra \
+	   -Iinclude
 LDFLAGS=
 
 ifndef MCU

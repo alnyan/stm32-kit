@@ -23,15 +23,15 @@ SECTIONS {
         . = ALIGN(4);
     } >FLASH
 
-    __data_start_src = .;
+    __data_start_ram = .;
 
-    .data : AT(__data_start_src) {
+    .data : AT(__data_start_ram) {
         . = ALIGN(4);
-        __data_start = .;
+        __data_start_rom = .;
         *(.data)
         *(.data*)
         . = ALIGN(4);
-        __data_end = .;
+        __data_end_rom = .;
     } >SRAM1
 
     .bss : {

@@ -14,6 +14,7 @@ struct stm32_gpio {
     uint32_t afrh;          // 0x24
 };
 
+static volatile struct stm32_gpio *const gpioa = (struct stm32_gpio *) 0x40020000;
 static volatile struct stm32_gpio *const gpiob = (struct stm32_gpio *) 0x40020400;
 static volatile struct stm32_gpio *const gpioc = (struct stm32_gpio *) 0x40020800;
 static volatile struct stm32_gpio *const gpiod = (struct stm32_gpio *) 0x40020C00;
