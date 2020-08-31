@@ -16,6 +16,7 @@ struct stm32_usart {
 };
 
 void usart_tx(volatile struct stm32_usart *usart, int ch);
+int usart_rx(volatile struct stm32_usart *usart);
 
 static volatile struct stm32_usart *const usart1 = (struct stm32_usart *) 0x40011000;
 static volatile struct stm32_usart *const usart2 = (struct stm32_usart *) 0x40004400;

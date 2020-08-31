@@ -19,6 +19,12 @@ void leds_init(void) {
     // PB7:     LED_BLINK
     // PB14     LED_ERROR
 
+    gpiob->moder &= ~(0x3 << (0 * 2));
+    gpiob->moder |= (0x1 << (0 * 2));
+    gpiob->pupdr &= ~(0x3 << (0 * 2));
+    gpiob->pupdr |= (0x2 << (0 * 2));
+    gpiob->otyper &= ~(1 << 0);
+
     gpiob->moder &= ~(0x3 << (7 * 2));
     gpiob->moder |= (0x1 << (7 * 2));
     gpiob->pupdr &= ~(0x3 << (7 * 2));

@@ -1,5 +1,6 @@
 #pragma once
 
+#define LED_ACTIVITY    (1 << 0)
 #define LED_BLINK       (1 << 7)
 #define LED_ERROR       (1 << 14)
 

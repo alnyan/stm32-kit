@@ -8,6 +8,8 @@ OBJCOPY=$(CROSS_COMPILE)objcopy
 HDRS=$(shell find include -type f -name "*.h")
 OBJS=$(O)/entry.o \
 	 $(O)/vectors.o \
+	 $(O)/libc/string.o \
+	 $(O)/debug.o \
 	 $(O)/spi_sd.o \
 	 $(O)/leds.o \
 	 $(O)/main.o
@@ -41,6 +43,7 @@ $(O)/%.o: src/%.c $(HDRS)
 
 $(O)/image.elf: $(OBJS) $(LDSCRIPT)
 	$(CC) $(LDFLAGS) -T$(LDSCRIPT) -o $@ $(OBJS)
+	$(CROSS_COMPILE)size $(O)/image.elf
 
 $(O)/image.hex: $(O)/image.elf
 	$(OBJCOPY) -O ihex $< $@
